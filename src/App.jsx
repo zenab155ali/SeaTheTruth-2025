@@ -6,6 +6,8 @@ import LiveData from "./jsx-files/LiveData";
 import Education from "./jsx-files/Education";
 import DesktopPage from "./jsx-files/DesktopPage";
 import Community from "./jsx-files/Community";
+import Statistics from "./jsx-files/Statistics"; // Import the new Statistics component
+import './scroll-fixes.css';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Route path="/education" element={<Education />} />
         <Route path="/community" element={<Community />} />
         <Route path="/dashboard" element={<DesktopPage />} />
+        <Route path="/statistics" element={<Statistics />} /> {/* Add the new Statistics route */}
       </Routes>
     </Router>
   );

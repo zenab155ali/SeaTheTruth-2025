@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, CircleMarker, Popup, LayersControl, LayerGroup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+
 import { 
   Filter, Info, Download, ChevronDown, ArrowLeft, ArrowRight,
   Clock, Map as MapIcon, BarChart2, PieChart, Share2, AlertTriangle
@@ -41,24 +42,33 @@ export default function LiveData() {
     { id: 'custom', name: 'Custom Range' },
   ];
 
-  // Simulated hotspots data
   const hotspots = [
-    { id: 1, lat: 32.1, lng: 34.8, type: 'plastic', severity: 'high', name: 'Tel Aviv Coast' },
-    { id: 2, lat: 31.8, lng: 34.65, type: 'oil', severity: 'medium', name: 'Ashdod Port Area' },
-    { id: 3, lat: 32.8, lng: 35.0, type: 'chemical', severity: 'high', name: 'Haifa Bay' },
-    { id: 4, lat: 29.5, lng: 34.9, type: 'fishing', severity: 'low', name: 'Eilat Coral Reef' },
-    { id: 5, lat: 31.4, lng: 34.4, type: 'sewage', severity: 'medium', name: 'Gaza Coast' },
-    { id: 6, lat: 32.5, lng: 34.9, type: 'plastic', severity: 'medium', name: 'Netanya Beach' },
-    { id: 7, lat: 33.0, lng: 35.1, type: 'chemical', severity: 'low', name: 'Northern Coast' },
-    { id: 8, lat: 32.05, lng: 34.75, type: 'plastic', severity: 'high', name: 'Gordon Beach, Tel Aviv' },
-    { id: 9, lat: 32.4, lng: 34.88, type: 'oil', severity: 'low', name: 'Hadera Coast' },
-    { id: 10, lat: 31.7, lng: 34.55, type: 'sewage', severity: 'high', name: 'Ashkelon Treatment Plant' },
-    { id: 11, lat: 32.82, lng: 34.98, type: 'chemical', severity: 'high', name: 'Kishon River Estuary' },
-    { id: 12, lat: 29.52, lng: 34.94, type: 'plastic', severity: 'medium', name: 'Dolphin Reef, Eilat' },
-    { id: 13, lat: 32.9, lng: 35.07, type: 'sewage', severity: 'medium', name: 'Acre Bay' },
-    { id: 14, lat: 31.65, lng: 34.58, type: 'plastic', severity: 'high', name: 'Zikim Beach' },
-    { id: 15, lat: 32.15, lng: 34.79, type: 'oil', severity: 'medium', name: 'Reading Power Plant' }
+    // 🟦 Mediterranean Sea – Plastic Pollution
+    { id: 101, lat: 32.0833, lng: 34.7667, type: 'plastic', severity: 'high', name: 'Tel Aviv Offshore' },
+    { id: 102, lat: 32.4667, lng: 34.8667, type: 'plastic', severity: 'high', name: 'Hadera Offshore' },
+    { id: 103, lat: 32.83, lng: 34.97, type: 'plastic', severity: 'medium', name: 'Haifa Offshore (Fixed)' },
+    { id: 104, lat: 31.66, lng: 34.55, type: 'plastic', severity: 'medium', name: 'Ashkelon Offshore (Fixed)' },
+  
+    // 🟧 Mediterranean Sea – Oil Pollution
+    { id: 201, lat: 32.1, lng: 34.7667, type: 'oil', severity: 'high', name: 'Tel Aviv Tar Zone 2021' },
+    { id: 202, lat: 32.32, lng: 34.83, type: 'oil', severity: 'high', name: 'Netanya Tar Impact (Fixed)' },
+    { id: 203, lat: 31.79, lng: 34.63, type: 'oil', severity: 'medium', name: 'Ashdod Marine Leak (Fixed)' },
+    { id: 204, lat: 33.0833, lng: 35.1, type: 'oil', severity: 'low', name: 'Rosh Hanikra Spill Zone' },
+  
+    // 🟥 Red Sea – Plastic Pollution
+    { id: 301, lat: 29.515, lng: 34.922, type: 'plastic', severity: 'medium', name: 'Eilat Coral Beach' },
+    { id: 302, lat: 29.55, lng: 34.9333, type: 'plastic', severity: 'medium', name: 'Eilat North Shore' },
+  
+    // 🟥 Red Sea – Oil Pollution
+    { id: 401, lat: 29.5, lng: 34.9167, type: 'oil', severity: 'high', name: 'Pipeline Risk – Gulf of Aqaba' },
+    { id: 402, lat: 29.47, lng: 34.96, type: 'oil', severity: 'medium', name: 'Coral Reserve Risk Zone' },
+  
+    // 🟪 Sea of Galilee – Plastic Pollution
+    { id: 501, lat: 32.8667, lng: 35.5833, type: 'plastic', severity: 'medium', name: 'Tiberias Shoreline' },
+    { id: 502, lat: 32.8333, lng: 35.6, type: 'plastic', severity: 'low', name: 'Kinneret North Bay' }
   ];
+  
+  
 
   // Simulate loading map data
   useEffect(() => {

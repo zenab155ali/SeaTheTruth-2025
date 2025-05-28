@@ -85,7 +85,7 @@ export default function Community() {
       reporter: "David Cohen",
       status: "Verified",
       severity: "high",
-      images: ["https://via.placeholder.com/400x300"],
+      images: ["/images/r1.jpg"],
       likes: 12,
       comments: 5
     },
@@ -99,7 +99,7 @@ export default function Community() {
       reporter: "Maya Levi",
       status: "Under review",
       severity: "medium",
-      images: ["https://via.placeholder.com/400x300"],
+      images: ["/images/r2.gif"],
       likes: 8,
       comments: 2
     },
@@ -113,7 +113,7 @@ export default function Community() {
       reporter: "Omar Yousef",
       status: "Confirmed",
       severity: "high",
-      images: ["https://via.placeholder.com/400x300"],
+      images: ["/images/r3.gif"],
       likes: 23,
       comments: 15
     },
@@ -127,7 +127,7 @@ export default function Community() {
       reporter: "Noa Berkovich",
       status: "Cleanup scheduled",
       severity: "medium",
-      images: ["https://via.placeholder.com/400x300"],
+      images: ["/images/r4.jpg"],
       likes: 17,
       comments: 9
     }

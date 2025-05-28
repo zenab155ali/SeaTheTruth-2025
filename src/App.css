@@ -165,26 +165,3 @@ main, .main-content {
 @media (max-width: 640px) {
   /* Mobile devices */
 }
-
-
-
-
-
-
-/* Add these styles to global-styles.css */
-body, html, #root {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-.container, .mx-auto {
-  width: 100% !important;
-  max-width: 100% !important;
-  padding: 0 !important;
-}
-
-main, .bg-gradient-to-b, .min-h-screen {
-  width: 100vw !important;
-  margin: 0 !important;
-}

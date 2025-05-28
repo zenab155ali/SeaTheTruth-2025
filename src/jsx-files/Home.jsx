@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 
 import { 
   BarChart, Map, Users, Droplet, AlertTriangle, Book, 

@@ -18,7 +18,7 @@ export default function Profile() {
   
   const [profileData, setProfileData] = useState({
     name: "Zaynab Ali",
-    email: "Zaynab.k.Z@example.com",
+    email: "Zaynab@gmail.com",
     location: "Sulam, Israel",
     bio: "Environmental activist and engineering student passionate about marine conservation. I've been volunteering with Ocean Conservancy for 6 years, organizing beach cleanups and community education initiatives.",
     profileImage: "/images/photo.jpg",
@@ -57,9 +57,17 @@ export default function Profile() {
       totalContribution: 124, // hours
     },
     carbonOffset: {
-      total: 1.4, // tons
-      monthly: [0.2, 0.2, 0.3, 0.1, 0.2, 0.4],
-      labels: ["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"]
+      total: 1.52, // tons
+      monthly: [0.17, 0.21, 0.26, 0.18, 0.29, 0.41],
+      labels: ["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"],
+      details: [
+        "3 beach cleanups, 4 waste reports",
+        "2 conservation events, 1 educational workshop",
+        "Coastal ecosystem survey, 3 waste reports",
+        "2 beach cleanups, 1 community outreach",
+        "Marine workshop organization, 5 waste reports",
+        "Earth Day cleanup (organizer), 6 waste reports"
+      ]
     },
     recentActions: [
       { id: 1, action: "Reported plastic pollution", location: "Tel Aviv Beach", date: "2 days ago", impact: 12 },
@@ -313,11 +321,6 @@ export default function Profile() {
                 className="w-full h-auto rounded-xl shadow-md"
                  />
                   </div>
-
-
-
-
-
               </div>
             </div>
           </div>
@@ -489,15 +492,17 @@ export default function Profile() {
                           <span className="text-xl font-semibold text-gray-800">{userData.carbonOffset.total}</span>
                           <span className="text-gray-600 ml-1">tons CO2</span>
                         </div>
-                        <span className="text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">+0.4 this month</span>
+                        <span className="text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                          +{userData.carbonOffset.monthly[5].toFixed(2)} this month
+                        </span>
                       </div>
                       
-                      {/* Simple carbon offset chart */}
+                      {/* Enhanced carbon offset chart */}
                       <div className="h-24 flex items-end space-x-2">
                         {userData.carbonOffset.monthly.map((value, index) => (
-                          <div key={index} className="flex-1 flex flex-col items-center">
+                          <div key={index} className="flex-1 flex flex-col items-center group relative">
                             <div 
-                              className="w-full bg-teal-500 rounded-t"
+                              className="w-full bg-teal-500 rounded-t hover:bg-teal-600 transition-colors"
                               style={{ 
                                 height: `${(value / Math.max(...userData.carbonOffset.monthly)) * 80}%`,
                                 transition: "height 1s ease-out",
@@ -506,8 +511,41 @@ export default function Profile() {
                               }}
                             ></div>
                             <span className="text-xs text-gray-500 mt-1">{userData.carbonOffset.labels[index]}</span>
+                            
+                            {/* Tooltip with detailed information */}
+                            <div className="absolute bottom-full mb-2 bg-white p-2 rounded shadow-md text-xs w-32 
+                                          opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                              <p className="font-semibold text-gray-800">{value.toFixed(2)} tons CO2</p>
+                              <p className="text-gray-500 text-xs mt-1">{userData.carbonOffset.details[index]}</p>
+                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 
+                                            rotate-45 w-2 h-2 bg-white border-r border-b border-gray-200"></div>
+                            </div>
                           </div>
                         ))}
+                      </div>
+                      
+                      {/* Added statistics summary */}
+                      <div className="mt-4 grid grid-cols-3 gap-3 text-center">
+                        <div>
+                          <p className="text-xs text-gray-500">HIGHEST MONTH</p>
+                          <p className="font-semibold">0.41 tons</p>
+                          <p className="text-xs text-gray-500">April</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">MONTHLY AVG</p>
+                          <p className="font-semibold">
+                            {(userData.carbonOffset.monthly.reduce((a, b) => a + b, 0) / 
+                              userData.carbonOffset.monthly.length).toFixed(2)} tons
+                          </p>
+                          <p className="text-xs text-gray-500">Last 6 months</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">GROWTH</p>
+                          <p className="font-semibold text-green-600">
+                            +{Math.round((userData.carbonOffset.monthly[5] / userData.carbonOffset.monthly[0] - 1) * 100)}%
+                          </p>
+                          <p className="text-xs text-gray-500">Nov to Apr</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -907,7 +945,7 @@ export default function Profile() {
                     <button className="w-full flex justify-between items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                       <div className="flex items-center">
                         <Shield className="h-5 w-5 text-gray-500 mr-3" />
-                        <span className="text-gray-800">Change Password</span>
+                        <span className="text-green-600">Change Password</span>
                       </div>
                       <ChevronRight className="h-5 w-5 text-gray-400" />
                     </button>
@@ -915,7 +953,7 @@ export default function Profile() {
                     <button className="w-full flex justify-between items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                       <div className="flex items-center">
                         <Bell className="h-5 w-5 text-gray-500 mr-3" />
-                        <span className="text-gray-800">Privacy Settings</span>
+                        <span className="text-green-600">Privacy Settings</span>
                       </div>
                       <ChevronRight className="h-5 w-5 text-gray-400" />
                     </button>
@@ -959,8 +997,6 @@ export default function Profile() {
           </div>
         </div>
       )}
-      
-      {/* Need to add the AnimatedCounter component */}
       
     </div>
   );
